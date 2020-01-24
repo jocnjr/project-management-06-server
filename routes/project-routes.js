@@ -8,7 +8,9 @@ const Task = require('../models/task-model'); // <== !!!
 
 // GET route => to get all the projects
 router.get('/projects', (req, res, next) => {
-  Project.find().populate('tasks')
+  Project.find().sort({
+      createdAt: -1
+    }).populate('tasks')
     .then(allTheProjects => {
       res.json(allTheProjects);
     })

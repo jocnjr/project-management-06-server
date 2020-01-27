@@ -9,7 +9,10 @@ const projectSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Task'
   }],
-  // owner will be added later on
+  owner: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
 }, {
   timestamps: true
 });

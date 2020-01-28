@@ -73,13 +73,16 @@ app.use(cors({
 // ROUTES MIDDLEWARE STARTS HERE:
 
 
-const index = require('./routes/index');
-app.use('/', index);
-
 const authRoutes = require('./routes/auth-routes');
 app.use('/api', authRoutes);
 const apiProject = require('./routes/project-routes');
 app.use('/api', apiProject);
 app.use('/api', require('./routes/task-routes'));
+
+// REACT ROUTE
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile(__dirname + "/public/index.html");
+});
 
 module.exports = app;

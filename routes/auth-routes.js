@@ -135,4 +135,18 @@ authRoutes.get('/loggedin', (req, res, next) => {
   });
 });
 
+authRoutes.get('/auth/google',
+  passport.authenticate('google', {
+    scope: [
+      "https://www.googleapis.com/auth/userinfo.profile",
+      "https://www.googleapis.com/auth/userinfo.email"
+    ]
+  }));
+
+authRoutes.get('/auth/google/callback',
+  passport.authenticate('google', {
+    successRedirect: process.env.CLIENT_URI + '/projects',
+    failureRedirect: process.env.CLIENT_URI + '/login'
+  }));
+
 module.exports = authRoutes;

@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
-const http = require('http');
+require('dotenv').config();
 
+const http = require('http');
+const port = process.env.PORT || 8081;
 let app = require('../app');
 
 // catch 404 and render a not-found.hbs template
@@ -24,7 +26,9 @@ app.use((err, req, res, next) => {
 let server = http.createServer(app);
 
 server.on('error', error => {
-  if (error.syscall !== 'listen') { throw error }
+  if (error.syscall !== 'listen') {
+    throw error
+  }
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
@@ -41,6 +45,6 @@ server.on('error', error => {
   }
 });
 
-server.listen(process.env.PORT, () => {
-  console.log(`Listening on http://localhost:${process.env.PORT}`);
+server.listen(port, () => {
+  console.log(`Listening on http://localhost:${port}`);
 });
